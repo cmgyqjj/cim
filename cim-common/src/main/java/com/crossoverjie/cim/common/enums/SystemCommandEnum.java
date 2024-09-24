@@ -21,8 +21,8 @@ public enum SystemCommandEnum {
          PREFIX(":pu        ","模糊匹配用户","PrefixSearchCommand"),
           EMOJI(":emoji     ","emoji 表情列表","EmojiCommand"),
            INFO(":info      ","获取客户端信息","EchoInfoCommand"),
-      DELAY_MSG(":delay     ","delay message, :delay [msg] [delayTime]","DelayMsgCommand")
-
+      DELAY_MSG(":delay     ","delay message, :delay [msg] [delayTime]","DelayMsgCommand"),
+        CREATE_GROUP(":cg        ",":cg [userId1,userId2...] 创建群聊","GroupCommand"),
     ;
 
     /** 枚举值码 */

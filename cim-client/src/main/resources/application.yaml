@@ -1,6 +1,17 @@
 spring:
   application:
     name: cim-client
+  data:
+    redis:
+      password: 123456
+      host: 127.0.0.1
+      port: 6379
+      jedis:
+        pool:
+          max-active: 100
+          max-idle: 100
+          max-wait: 1000
+          min-idle: 10
 
 # web port
 server:
