@@ -6,6 +6,7 @@ import com.crossoverjie.cim.common.pojo.CIMUserInfo;
 import com.crossoverjie.cim.route.api.vo.req.P2PReqVO;
 import com.crossoverjie.cim.route.api.vo.res.CIMServerResVO;
 import java.io.Closeable;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -36,4 +37,5 @@ public interface Client extends Closeable {
 
     Optional<CIMServerResVO> getServerInfo();
 
+    String createGroup(List<String> userIds);
 }

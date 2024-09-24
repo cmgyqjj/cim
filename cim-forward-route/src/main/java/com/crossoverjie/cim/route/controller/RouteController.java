@@ -10,14 +10,12 @@ import com.crossoverjie.cim.common.res.NULLBody;
 import com.crossoverjie.cim.common.route.algorithm.RouteHandle;
 import com.crossoverjie.cim.common.util.RouteInfoParseUtil;
 import com.crossoverjie.cim.route.api.RouteApi;
-import com.crossoverjie.cim.route.api.vo.req.ChatReqVO;
-import com.crossoverjie.cim.route.api.vo.req.LoginReqVO;
-import com.crossoverjie.cim.route.api.vo.req.P2PReqVO;
-import com.crossoverjie.cim.route.api.vo.req.RegisterInfoReqVO;
+import com.crossoverjie.cim.route.api.vo.req.*;
 import com.crossoverjie.cim.route.api.vo.res.CIMServerResVO;
 import com.crossoverjie.cim.route.api.vo.res.RegisterInfoResVO;
 import com.crossoverjie.cim.route.service.AccountService;
 import com.crossoverjie.cim.route.service.CommonBizService;
+import com.crossoverjie.cim.route.service.GroupService;
 import com.crossoverjie.cim.route.service.UserInfoCacheService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
@@ -28,10 +26,7 @@ import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Function:
@@ -59,6 +54,9 @@ public class RouteController implements RouteApi {
 
     @Resource
     private RouteHandle routeHandle;
+
+    @Resource
+    private GroupService groupService;
 
     @Operation(summary = "群聊 API")
     @RequestMapping(value = "groupRoute", method = RequestMethod.POST)
@@ -219,6 +217,19 @@ public class RouteController implements RouteApi {
 
         Set<CIMUserInfo> cimUserInfos = userInfoCacheService.onlineUser();
         res.setDataBody(cimUserInfos);
+        res.setCode(StatusEnum.SUCCESS.getCode());
+        res.setMessage(StatusEnum.SUCCESS.getMessage());
+        return res;
+    }
+
+    @Operation(summary = "创建群组")
+    @RequestMapping(value = "createGroup", method = RequestMethod.POST)
+    @ResponseBody()
+    @Override
+    public BaseResponse<String> createGroup(@RequestBody CreateGroupReqVo createGroupReqVo) {
+        BaseResponse<String> res = new BaseResponse();
+        String group = groupService.createGroup(createGroupReqVo);
+        res.setDataBody(group);
         res.setCode(StatusEnum.SUCCESS.getCode());
         res.setMessage(StatusEnum.SUCCESS.getMessage());
         return res;

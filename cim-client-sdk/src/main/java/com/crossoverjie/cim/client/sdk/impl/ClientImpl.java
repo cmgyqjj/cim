@@ -24,6 +24,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.DefaultThreadFactory;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
@@ -254,5 +256,10 @@ public class ClientImpl extends ClientState implements Client {
     @Override
     public Optional<CIMServerResVO> getServerInfo() {
         return Optional.ofNullable(this.serverInfo);
+    }
+
+    @Override
+    public String createGroup(List<String> userIds) {
+        return routeManager.createGroup(userIds);
     }
 }

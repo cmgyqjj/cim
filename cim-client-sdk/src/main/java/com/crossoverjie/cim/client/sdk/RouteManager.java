@@ -9,9 +9,12 @@ import com.crossoverjie.cim.common.res.BaseResponse;
 import com.crossoverjie.cim.common.res.NULLBody;
 import com.crossoverjie.cim.route.api.RouteApi;
 import com.crossoverjie.cim.route.api.vo.req.ChatReqVO;
+import com.crossoverjie.cim.route.api.vo.req.CreateGroupReqVo;
 import com.crossoverjie.cim.route.api.vo.req.LoginReqVO;
 import com.crossoverjie.cim.route.api.vo.req.P2PReqVO;
 import com.crossoverjie.cim.route.api.vo.res.CIMServerResVO;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -77,5 +80,11 @@ public class RouteManager {
     public Set<CIMUserInfo> onlineUser() throws Exception {
         BaseResponse<Set<CIMUserInfo>> onlineUsersResVO = routeApi.onlineUser();
         return onlineUsersResVO.getDataBody();
+    }
+
+    public String createGroup(List<String> userIds) {
+        CreateGroupReqVo createGroupReqVo = new CreateGroupReqVo(userIds);
+        BaseResponse<String> groupId = routeApi.createGroup(createGroupReqVo);
+        return groupId.getDataBody();
     }
 }

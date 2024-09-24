@@ -107,19 +107,4 @@ public class BeanConfig {
         return new RingBufferWheel(executorService);
     }
 
-    /**
-     * Redis bean
-     *
-     * @param factory
-     * @return
-     */
-    @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-        StringRedisTemplate redisTemplate = new StringRedisTemplate(factory);
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new StringRedisSerializer());
-        redisTemplate.afterPropertiesSet();
-        return redisTemplate;
-    }
-
 }
